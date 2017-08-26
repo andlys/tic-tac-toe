@@ -26,6 +26,11 @@
             (setf curr (first players))
             (print-board board)
             (format t "Player ~A makes a move!~%" (player-sym curr))
+            (when (> n 3)
+                (format t "CHOICE: ~A~% MINIMAX-VALUE: ~A~% CHILDREN?: ~A~%"
+                        (node-choice node)
+                        (node-minimax-value node)
+                        (null (node-children node))))
             (setf node (funcall (player-strategy curr) board
                                 (player-sym curr) node))
             (setf pattern (check-victory board (player-sym curr)))

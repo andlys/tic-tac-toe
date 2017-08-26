@@ -37,6 +37,7 @@
     (clear-input)
     (prog1
         (setf node (node-next node))
+        (format t "~A~%" (node-choice node))
         (make-move-emulate board sym (node-choice node))))
 
 ;;; makes a move according to choice variable
