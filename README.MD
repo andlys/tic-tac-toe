@@ -29,4 +29,5 @@ Default configuration is:
 * player X - human;
 * player O - AI.
 
+Human choice input visually is made through numpad numbers.
 However, you can change it easily as you please
