@@ -26,7 +26,7 @@
             (setf curr (first players))
             (print-board board)
             (format t "Player ~A makes a move!~%" (player-sym curr))
-            (when (> n 3)
+            (when nil ; TODO remove this
                 (format t "CHOICE: ~A~% MINIMAX-VALUE: ~A~% CHILDREN?: ~A~%"
                         (node-choice node)
                         (node-minimax-value node)
@@ -44,3 +44,5 @@
             (setf players (reverse players))
             (when (= n 8)
                 (format t "It's a draw: nobody won")))))
+
+(play)

@@ -35,9 +35,9 @@
                 (if (node-beta? tree)
                     (reduce #'max lst :key #'node-minimax-value)
                     (reduce #'min lst :key #'node-minimax-value)))
-            ;; from the most winning moves try to choose the one that
+            ;; from the best moves available try to choose the one that
             ;; definitely leads to win on the next move
-            ;; otherwise simply pick a move
+            ;; otherwise simply pick a move from among the best
             (unless (setf (node-next tree) ; try to pick a fast victory
                           (car (remove-if-not #'(lambda (v)
                                               (= v (node-minimax-value tree)))
@@ -47,10 +47,6 @@
                       (find (node-minimax-value tree) lst
                             :key #'node-minimax-value)))))
     tree)
-
-; TODO 
-; (defun invincible (node tree disaster)
-    ; (notany #'(lambda (n) (= (node-minimax-value n) disaster)) (node-children tree))
 
 ;;; builds a minimax tree
 (defun build-tree ()
