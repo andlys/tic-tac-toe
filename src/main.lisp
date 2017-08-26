@@ -10,7 +10,9 @@
 
 (load "player.lisp")
 
+(write-line "Building a minimax tree... This may take a few seconds...")
 (defconstant root-node (build-tree))
+(write-line "Done!")
 
 (defun play ()
     (let ((players (list (make-player :sym 'x :strategy 'make-move-ai)

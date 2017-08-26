@@ -19,6 +19,8 @@ One of the ways you can run this project on Ubuntu:
 `sudo apt-get install sbcl`
 * clone the code from this repository:  
 `git clone https://github.com/andlys/tic-tac-toe`
-* run the project as script  
-`sbcl --script tic-tac-toe/src/main.lisp`
+* change current directory:  
+`cd tic-tac-toe/src`
+* run the project as script:  
+`sbcl --script main.lisp`
 * enjoy!  
