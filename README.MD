@@ -24,3 +24,9 @@ One of the ways you can run this project on Ubuntu:
 * run the project as script:  
 `sbcl --script main.lisp`
 * enjoy!  
+
+Default configuration is:
+* player X - human;
+* player O - AI.
+
+However, you can change it easily as you please

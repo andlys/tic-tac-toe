@@ -15,8 +15,8 @@
 (write-line "Done!")
 
 (defun play ()
-    (let ((players (list (make-player :sym 'x :strategy 'make-move-ai)
-                         (make-player :sym 'o :strategy 'make-move-random)))
+    (let ((players (list (make-player :sym 'x :strategy 'make-move-human)
+                         (make-player :sym 'o :strategy 'make-move-ai)))
           (curr) ; current player
           (pattern) ; used to verify if current player wins
           (node root-node)
@@ -45,6 +45,6 @@
                     (return))
             (setf players (reverse players))
             (when (= n 8)
-                (format t "It's a draw: nobody won")))))
+                (format t "It's a draw: nobody won~%")))))
 
-(play)
+(loop (play))

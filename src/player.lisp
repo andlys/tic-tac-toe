@@ -14,7 +14,7 @@
 ;;; makes a move randomly choosing from among empty cells on the board
 ;;; sym - symbol of the current player
 (defun make-move-random (board sym node)
-    (format t "Press enter for computer to make a move...~%")
+    (format t "Press Enter for computer to make a move...~%")
     (read-line)
     (clear-input)
     (let (lst)
@@ -32,7 +32,7 @@
 ;;; makes a move according to current position in minimax tree
 ;;; sym - symbol of the current player
 (defun make-move-ai (board sym node)
-    (format t "Press enter for computer to make a move...~%")
+    (format t "Press Enter for computer to make a move...~%")
     (read-line)
     (clear-input)
     (prog1
