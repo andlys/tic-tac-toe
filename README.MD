@@ -28,6 +28,6 @@ One of the ways you can run this project on Ubuntu:
 Default configuration is:
 * player X - human;
 * player O - AI.
+However, you can change it easily as you please.  
 
-Human choice input visually is made through numpad numbers.
-However, you can change it easily as you please
+Human input visually is made through numpad numbers.
