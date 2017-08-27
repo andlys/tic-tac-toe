@@ -1,3 +1,71 @@
+Two players loaded:
+#S(PLAYER :SYM X :STRATEGY MAKE-MOVE-HUMAN)
+#S(PLAYER :SYM O :STRATEGY MAKE-MOVE-AI)
+
+
+Player X makes a move!
+8
+This cell is taken! Try another one
+9
+X X   O O   X X
+X X   O O   X X
+
+- -   O O   - -
+- -   O O   - -
+
+O O   X X   X X
+O O   X X   X X
+
+Player O makes a move!
+Press Enter for computer to make a move...
+
+3
+X X   O O   X X
+X X   O O   X X
+
+O O   O O   - -
+O O   O O   - -
+
+O O   X X   X X
+O O   X X   X X
+
+Player X makes a move!
+6
+X X   O O   X X
+X X   O O   X X
+
+O O   O O   X X
+O O   O O   X X
+
+O O   X X   X X
+O O   X X   X X
+
+Victory! Player X won the game with the pattern:
+- - V
+- - V
+- - V
+
+
+
+
+=====
+down is old log!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Player O makes a move!
 Press enter for computer to make a move...
 

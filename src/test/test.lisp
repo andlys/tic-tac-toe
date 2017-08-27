@@ -3,13 +3,6 @@
 ; (load "utils.lisp")
 ; (load "tree.lisp")
 
-;;; appends a node to the end of a children list of a tree
-(defun node-insert (tree node)
-    (if (node-children tree) ; if children list is not empty
-        (setf (cdr (node-children tree)) ; append to the end
-              (cons node nil))
-        (push node (node-children tree)))) ; make a list of one elem
-
 ;;; tree ... ; TODO del ?
 (defparameter root (make-node))
 
@@ -26,7 +19,7 @@
                                    :choice choice
                                    :minimax-value (if (= move-number 1) -1 nil)))
                     ;; set other fields...
-                    (node-insert tree node))
+                    (push node (node-children tree))
                 (setf tree node))
                 (incf move-number))))
 
