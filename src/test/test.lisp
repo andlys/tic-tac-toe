@@ -3,7 +3,6 @@
 ; (load "utils.lisp")
 ; (load "tree.lisp")
 
-;;; tree ... ; TODO del ?
 (defparameter root (make-node))
 
 (dolist (lst (permutations (list 0 1)))
@@ -52,9 +51,22 @@
             (terpri)
             (leaf (first (node-children tree))))))
 
+;; old version of the function...
+(defun permutations (lst &optional (lst-used nil))
+    (if (null lst)
+        (list lst-used)
+        (let ((diff (set-difference lst lst-used)) ; verbose
+              (res)) ;verbose
+            (dolist (elt diff res) ; use collect
+                (setf res (append res (permutations
+                    (remove elt lst)
+                    (adjoin elt lst-used)))))))) ; adjoin? all elements are unique by default, why not push?
+
+(loop for elt in '((a b) (a c) (a d))
+    collect elt)
+
 ;(leaf root-node)
 
-; TODO:
 ; (setf tree (funcall ...) )
 
 ;(play)

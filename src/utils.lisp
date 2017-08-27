@@ -53,14 +53,12 @@
 (defun permutations (lst &optional (lst-used nil))
     (if (null lst)
         (list lst-used)
-        (let ((diff (set-difference lst lst-used))
-              (res))
-            (dolist (elt diff res)
-                (setf res (append res (permutations
-                    (remove elt lst)
-                    (adjoin elt lst-used))))))))
+        (loop for elt in (set-difference lst lst-used)
+            append (permutations (remove elt lst)
+                                 (adjoin elt lst-used)))))
 
-;;; compares two lists of the same length
+;;; compares two lists containing numbers that have equal length
+;;; returns t if (< lst1 lst2)
 (defun list< (lst1 lst2)
     (if lst1
         (if (< (car lst1) (car lst2))
@@ -68,11 +66,3 @@
             (if (= (car lst1) (car lst2))
                 (list< (cdr lst1) (cdr lst2))
                 nil))))
-
-
-#|
-(mapcar #'print
-       (sort (permutations (list 0 1 2 3))
-             #'list<))
-
-|#
