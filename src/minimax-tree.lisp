@@ -23,6 +23,7 @@
     children)
 
 ;;; returns a modified tree
+;;; figures out what next move is best suited for AI
 ;;; sets node-minimax-value, node-next values of all nodes in the tree
 (defun set-minimax-values (tree)
     (unless (node-leaf? tree)
@@ -48,7 +49,10 @@
                             :key #'node-minimax-value)))))
     tree)
 
-;;; builds a minimax tree
+;;; returns built minimax tree
+;;; emulates every possible game session
+;;; runs through every possible sequence of moves
+;;; stores each move into the tree
 (defun build-tree ()
     (let ((root (make-node))
           (inputs-lst (permutations (list 0 1 2 3 4 5 6 7 8))))
@@ -60,36 +64,38 @@
                                       :strategy 'make-move-emulate)))
                   (move-number 0)
                   (currp) ; current player
-                  (pattern)
+                  (node)
                   (tree root))
                 (dolist (choice inputs)
-                    (let ((node (find choice (node-children tree) :key #'node-choice))) ; TODO refactor the line
-                        (unless node
-                            (setf node
-                                (make-node :alpha? (evenp move-number)
-                                           :beta?  (oddp  move-number)
-                                           :choice choice)))
-                          (setf currp (first players))
-                          (funcall (player-strategy currp)
-                                   board
-                                   (player-sym currp)
-                                   choice)
-                          (setf pattern
-                               (check-victory board (player-sym currp)))
-                          (when pattern ; player currp wins
-                              (setf (node-leaf? node) t)
-                              (setf (node-minimax-value node)
-                                    (case (player-sym currp)
-                                          (x 1)
-                                          (o -1))))
-                          (when (= move-number 8) ; draw: nobody wins
-                              (setf (node-leaf? node) t)
-                              (setf (node-minimax-value node) 0))
-                          ;; stop iterating if this move was the last on board
-                          (unless (find choice (node-children tree) :key #'node-choice) ; TODO refactor this
-                            (push node (node-children tree)))
-                          (setf tree node)
-                          (when (node-leaf? node) (return))
-                          (setf players (reverse players))
-                          (incf move-number)))))
+                    ;; if node is absent among children, make a new node
+                    (unless (setf node
+                                 (find choice
+                                      (node-children tree)
+                                       :key #'node-choice))
+                        (setf node
+                             (make-node :alpha? (evenp move-number)
+                                        :beta?  (oddp  move-number)
+                                        :choice choice))
+                        (push node (node-children tree)))
+                    (setf currp (first players))
+                    (funcall (player-strategy currp)
+                              board
+                             (player-sym currp)
+                              choice)
+                     ;; when player currp wins
+                    (when (check-victory board (player-sym currp))
+                        (setf (node-leaf? node) t)
+                        (setf (node-minimax-value node)
+                              (case (player-sym currp)
+                                  (x 1)
+                                  (o -1))))
+                    ;; when draw: nobody wins
+                    (when (= move-number 8)
+                         (setf (node-leaf? node) t)
+                         (setf (node-minimax-value node) 0))
+                    (setf tree node)
+                    ;; stop iterating if this move was the last on board
+                    (when (node-leaf? node) (return))
+                    (setf players (reverse players))
+                    (incf move-number))))
         (set-minimax-values root)))
